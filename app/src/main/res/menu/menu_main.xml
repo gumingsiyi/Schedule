@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.example.stiles.timetable.MainActivity">
+    <item android:id="@+id/exit"
+          android:title="退出"
+          android:orderInCategory="2"
+          app:showAsAction="never"/>
+    <item android:id="@+id/add"
+          android:title="添加课程"
+          android:orderInCategory="1"
+          app:showAsAction="never"/>
+</menu>
