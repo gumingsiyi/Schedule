@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity {
     static final int ADD_CLASS_CODE = 1;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 2) {
+        if (requestCode == ADD_CLASS_CODE) {
             if (resultCode == RESULT_OK) {
                 
             }

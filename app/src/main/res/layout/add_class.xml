@@ -57,20 +57,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:layout_gravity="center">
             <Button
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:text="+"
                     android:textSize="30sp"
-                    android:layout_marginLeft="90dp"
+                    android:layout_marginLeft="70dp"
                     android:textColor="#ffffff"
                     android:background="@drawable/btn_shape_circle_green"
                     android:id="@+id/add_detail_btn" android:layout_gravity="center_horizontal"/>
             <TextView
-                    android:textColor="#000000"
+                    android:textColor="#ffffff"
                     android:textSize="15sp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="点击添加课程时间地点"
+                    android:shadowColor="#000000"
+                    android:shadowDx="5"
+                    android:shadowDy="5"
+                    android:shadowRadius="2"
                     android:layout_marginLeft="20dp"
                     android:gravity="center"/>
         </LinearLayout>

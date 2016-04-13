@@ -9,10 +9,12 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
     String DATABASENAME = "schedule.db";
-    String TABLENAME = "class";
-    String ID = "id";
-    String CLASSNAME = "class_name";
-
+    private String TABLENAME = "class";
+    private String ID = "id";
+    private String CLASSNAME = "class_name";
+    private String WEEK = "week";
+    private String START = "start";
+    private String LENGTH = "length";
 
     public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -20,7 +22,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        String sql = "create table if not exists " + TABLENAME + "(" +
+                ID + " integer primary key autoincrement, " +
+                CLASSNAME + " text, " +
+                WEEK + " integer, " +
+                START + " integer, " +
+                LENGTH + " integer);";
 
+        sqLiteDatabase.execSQL(sql);
     }
 
     @Override
