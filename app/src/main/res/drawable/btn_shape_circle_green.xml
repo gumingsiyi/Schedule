@@ -9,4 +9,12 @@
 
         </shape>
     </item>
+
+    <item android:state_pressed="true">
+        <shape>
+            <!--色值-->
+            <solid android:color="#2ccc72" />
+            <corners android:radius="5dp"/>
+        </shape>
+    </item>
 </selector>

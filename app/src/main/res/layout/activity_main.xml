@@ -107,7 +107,8 @@
                 android:text="12"
                 android:layout_weight="1.0"
                 android:maxEms="1"
-                android:background="@drawable/background_gery"/>
+                android:background="@drawable/background_gery"
+                android:gravity="center"/>
 
     </LinearLayout>
     <LinearLayout

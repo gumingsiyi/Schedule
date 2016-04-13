@@ -1,4 +1,4 @@
-package com.example.stiles.schedule.model;
+package com.example.stiles.model;
 
 /**
  * Created by stiles on 16/4/13.
@@ -8,10 +8,9 @@ public class Class {
     private String teacher_name;
     private String classroom;
     private int week;
-    private int[] time;
+    private int time;
 
-    public Class() {
-        time = new int[14];
+    public Class(){
     }
 
     public String getClass_name() {
@@ -46,11 +45,11 @@ public class Class {
         this.week = week;
     }
 
-    public int[] getTime() {
+    public int getTime() {
         return time;
     }
 
-    public void setTime(int[] time) {
+    public void setTime(int time) {
         this.time = time;
     }
 }

@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@drawable/book"
-              android:alpha="0.5"
+
 >
 
 
@@ -79,6 +79,9 @@
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/btn_shape_orange"
+            android:textColor="#000000"
             android:text="完成"
+            android:alpha="1.0"
             android:id="@+id/submit_btn" android:layout_gravity="center_horizontal"/>
 </LinearLayout>
