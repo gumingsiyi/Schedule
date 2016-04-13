@@ -49,8 +49,9 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:layout_gravity="center_horizontal"
-            android:layout_margin="20dp">
+            android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:id="@+id/container">
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -73,5 +74,11 @@
                     android:layout_marginLeft="20dp"
                     android:gravity="center"/>
         </LinearLayout>
+
     </LinearLayout>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="完成"
+            android:id="@+id/submit_btn" android:layout_gravity="center_horizontal"/>
 </LinearLayout>
