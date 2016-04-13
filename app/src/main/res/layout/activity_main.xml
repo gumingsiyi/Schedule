@@ -19,7 +19,7 @@
                 android:text="1"
                 android:layout_weight="1.0"
                 android:maxEms="1"
-                android:background="@drawable/background3"
+                android:background="@drawable/background_gery"
                 android:gravity="center"/>
         <TextView
                 android:layout_width="fill_parent"
@@ -27,7 +27,7 @@
                 android:text="2"
                 android:layout_weight="1.0"
                 android:maxEms="1"
-                android:background="@drawable/background3"
+                android:background="@drawable/background_gery"
                 android:gravity="center"/>
         <TextView
                 android:layout_width="fill_parent"
@@ -35,7 +35,7 @@
                 android:text="3"
                 android:layout_weight="1.0"
                 android:maxEms="1"
-                android:background="@drawable/background3"
+                android:background="@drawable/background_gery"
                 android:gravity="center"/>
         <TextView
                 android:layout_width="fill_parent"
@@ -43,7 +43,7 @@
                 android:text="4"
                 android:layout_weight="1.0"
                 android:maxEms="1"
-                android:background="@drawable/background3"
+                android:background="@drawable/background_gery"
                 android:gravity="center"/>
         <TextView
                 android:layout_width="fill_parent"
@@ -51,7 +51,7 @@
                 android:text="5"
                 android:layout_weight="1.0"
                 android:maxEms="1"
-                android:background="@drawable/background3"
+                android:background="@drawable/background_gery"
                 android:gravity="center"/>
         <TextView
                 android:layout_width="fill_parent"
@@ -59,7 +59,7 @@
                 android:text="6"
                 android:layout_weight="1.0"
                 android:maxEms="1"
-                android:background="@drawable/background3"
+                android:background="@drawable/background_gery"
                 android:gravity="center"/>
         <TextView
                 android:layout_width="fill_parent"
@@ -67,7 +67,7 @@
                 android:text="7"
                 android:layout_weight="1.0"
                 android:maxEms="1"
-                android:background="@drawable/background3"
+                android:background="@drawable/background_gery"
                 android:gravity="center"/>
         <TextView
                 android:layout_width="fill_parent"
@@ -75,7 +75,7 @@
                 android:text="8"
                 android:layout_weight="1.0"
                 android:maxEms="1"
-                android:background="@drawable/background3"
+                android:background="@drawable/background_gery"
                 android:gravity="center"/>
         <TextView
                 android:layout_width="fill_parent"
@@ -83,7 +83,7 @@
                 android:text="9"
                 android:layout_weight="1.0"
                 android:maxEms="1"
-                android:background="@drawable/background3"
+                android:background="@drawable/background_gery"
                 android:gravity="center"/>
         <TextView
                 android:layout_width="fill_parent"
@@ -91,7 +91,7 @@
                 android:text="10"
                 android:layout_weight="1.0"
                 android:maxEms="1"
-                android:background="@drawable/background3"
+                android:background="@drawable/background_gery"
                 android:gravity="center"/>
         <TextView
                 android:layout_width="fill_parent"
@@ -99,7 +99,7 @@
                 android:text="11"
                 android:layout_weight="1.0"
                 android:maxEms="1"
-                android:background="@drawable/background3"
+                android:background="@drawable/background_gery"
                 android:gravity="center"/>
         <TextView
                 android:layout_width="fill_parent"
@@ -107,7 +107,7 @@
                 android:text="12"
                 android:layout_weight="1.0"
                 android:maxEms="1"
-                android:background="@drawable/background3"/>
+                android:background="@drawable/background_gery"/>
 
     </LinearLayout>
     <LinearLayout
@@ -115,7 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
-            android:background="@drawable/background"
+            android:background="@drawable/background_lightblue"
             android:id="@+id/mon">
     </LinearLayout>
     <LinearLayout
@@ -123,7 +123,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
-            android:background="@drawable/background1"
+            android:background="@drawable/background_lightgreen"
             android:id="@+id/tue">
     </LinearLayout>
     <LinearLayout
@@ -131,7 +131,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
-            android:background="@drawable/background"
+            android:background="@drawable/background_lightblue"
             android:id="@+id/wed">
     </LinearLayout>
     <LinearLayout
@@ -139,7 +139,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
-            android:background="@drawable/background1"
+            android:background="@drawable/background_lightgreen"
             android:id="@+id/thu">
     </LinearLayout>
     <LinearLayout
@@ -147,7 +147,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
-            android:background="@drawable/background"
+            android:background="@drawable/background_lightblue"
             android:id="@+id/fri">
     </LinearLayout>
     <LinearLayout
@@ -155,7 +155,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
-            android:background="@drawable/background1"
+            android:background="@drawable/background_lightgreen"
             android:id="@+id/sat">
     </LinearLayout>
     <LinearLayout
@@ -163,7 +163,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
-            android:background="@drawable/background"
+            android:background="@drawable/background_lightblue"
             android:id="@+id/sun">
     </LinearLayout>
 </LinearLayout>
