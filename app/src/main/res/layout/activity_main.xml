@@ -5,6 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.example.stiles.schedule.MainActivity"
+        android:id="@+id/main_layout"
 >
 
     <LinearLayout
@@ -111,60 +112,60 @@
                 android:gravity="center"/>
 
     </LinearLayout>
-    <LinearLayout
+    <RelativeLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/background_lightblue"
             android:id="@+id/mon">
-    </LinearLayout>
-    <LinearLayout
+    </RelativeLayout>
+    <RelativeLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/background_lightgreen"
             android:id="@+id/tue">
-    </LinearLayout>
-    <LinearLayout
+    </RelativeLayout>
+    <RelativeLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/background_lightblue"
             android:id="@+id/wed">
-    </LinearLayout>
-    <LinearLayout
+    </RelativeLayout>
+    <RelativeLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/background_lightgreen"
             android:id="@+id/thu">
-    </LinearLayout>
-    <LinearLayout
+    </RelativeLayout>
+    <RelativeLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/background_lightblue"
             android:id="@+id/fri">
-    </LinearLayout>
-    <LinearLayout
+    </RelativeLayout>
+    <RelativeLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/background_lightgreen"
             android:id="@+id/sat">
-    </LinearLayout>
-    <LinearLayout
+    </RelativeLayout>
+    <RelativeLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/background_lightblue"
             android:id="@+id/sun">
-    </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

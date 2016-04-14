@@ -5,26 +5,49 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    static final int ADD_CLASS_CODE = 1;
-
+    private static final int ADD_CLASS_CODE = 1;
+    private RelativeLayout[] week = new RelativeLayout[7];
+    private int per_height;
+    private int height;
+    private int width;
+    private boolean hasMeasured = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final LinearLayout main_layout = (LinearLayout)findViewById(R.id.main_layout);
 
-        final LinearLayout[] week = new LinearLayout[7];
+        week[0] = (RelativeLayout) findViewById(R.id.mon);
+        week[1] = (RelativeLayout) findViewById(R.id.tue);
+        week[2] = (RelativeLayout) findViewById(R.id.wed);
+        week[3] = (RelativeLayout) findViewById(R.id.thu);
+        week[4] = (RelativeLayout) findViewById(R.id.fri);
+        week[5] = (RelativeLayout) findViewById(R.id.sat);
+        week[6] = (RelativeLayout) findViewById(R.id.sun);
 
-        week[1] = (LinearLayout) findViewById(R.id.mon);
-        week[2] = (LinearLayout) findViewById(R.id.tue);
-        week[3] = (LinearLayout) findViewById(R.id.wed);
-        week[4] = (LinearLayout) findViewById(R.id.thu);
-        week[5] = (LinearLayout) findViewById(R.id.fri);
-        week[6] = (LinearLayout) findViewById(R.id.sat);
-        week[0] = (LinearLayout) findViewById(R.id.sun);
+        ViewTreeObserver vto = main_layout.getViewTreeObserver();
+        vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                if (!hasMeasured) {
+                    height = week[0].getMeasuredHeight();
+                    width = week[0].getMeasuredWidth();
+                    per_height = height/12;
+                    hasMeasured = true;
+                    Toast.makeText(MainActivity.this, String.valueOf(height), Toast.LENGTH_LONG).show();
+
+                }
+                return true;
+            }
+        });
+
 
     }
 
