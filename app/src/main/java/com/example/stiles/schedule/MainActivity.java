@@ -1,6 +1,8 @@
 package com.example.stiles.schedule;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,8 +10,11 @@ import android.view.MenuItem;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.Toast;
+import com.example.stiles.database.DatabaseHelper;
+import com.example.stiles.model.Class;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private static final int ADD_CLASS_CODE = 1;
@@ -18,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private int height;
     private int width;
     private boolean hasMeasured = false;
+    private ArrayList<Class> classList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
                     per_height = height/12;
                     hasMeasured = true;
                     Toast.makeText(MainActivity.this, String.valueOf(height), Toast.LENGTH_LONG).show();
-
                 }
                 return true;
             }
@@ -60,9 +65,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -84,6 +86,55 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 
             }
+        }
+    }
+    //从数据库中得到课程信息,生成视图.
+    private void drawClass() {
+        for (int i = 0; i < 7; i++) {
+            week[i].removeAllViews();
+        }
+        setClassList();
+        if (classList != null) {
+            for (Class cur: classList) {
+
+            }
+        }
+    }
+
+    private void setClassList() {
+        classList = new ArrayList<>();
+        DatabaseHelper helper = new DatabaseHelper(getBaseContext());
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cursor = db.query(DatabaseHelper.TABLENAME, null, null, null, null, null, null);
+
+        int idIndex = cursor.getColumnIndex(DatabaseHelper.ID);
+        int classNameIndex = cursor.getColumnIndex(DatabaseHelper.CLASSNAME);
+        int teacherNameIndex = cursor.getColumnIndex(DatabaseHelper.TABLENAME);
+        int classroomIndex = cursor.getColumnIndex(DatabaseHelper.CLASSROOM);
+        int weekIndex = cursor.getColumnIndex(DatabaseHelper.WEEK);
+        int startIndex = cursor.getColumnIndex(DatabaseHelper.START);
+        int lengthIndex = cursor.getColumnIndex(DatabaseHelper.LENGTH);
+
+        int id;
+        String className;
+        String teacherName;
+        String classroom;
+        int week;
+        int start;
+        int length;
+
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            id = cursor.getInt(idIndex);
+            className = cursor.getString(classNameIndex);
+            teacherName = cursor.getString(teacherNameIndex);
+            classroom = cursor.getString(classroomIndex);
+            week = cursor.getInt(weekIndex);
+            start = cursor.getInt(startIndex);
+            length = cursor.getInt(lengthIndex);
+
+            Class c = new Class(className, teacherName, classroom, week, start, length);
+            c.id = id;
+            classList.add(c);
         }
     }
 }

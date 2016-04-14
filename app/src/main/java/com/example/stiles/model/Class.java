@@ -4,6 +4,7 @@ package com.example.stiles.model;
  * Created by stiles on 16/4/13.
  */
 public class Class {
+    public int id;
     private String class_name;
     private String teacher_name;
     private String classroom;
@@ -12,6 +13,15 @@ public class Class {
     private int length;
 
     public Class(){
+    }
+
+    public Class(String class_name, String teacher_name, String classroom, int week, int start, int length) {
+        this.class_name = class_name;
+        this.teacher_name = teacher_name;
+        this.classroom = classroom;
+        this.week = week;
+        this.start = start;
+        this.length = length;
     }
 
     public String getClass_name() {
