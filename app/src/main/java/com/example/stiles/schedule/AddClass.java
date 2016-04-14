@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import java.util.ArrayList;
+
 /**
  * Created by stiles on 16/4/12.
  */
@@ -17,6 +19,7 @@ public class AddClass extends Activity {
     private static final String[] weeks = {"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
     private static final String[] start = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"};
     private static final String[] length = {"1", "2", "3", "4", "5"};
+    private ArrayList<LinearLayout> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,7 @@ public class AddClass extends Activity {
         setContentView(R.layout.add_class);
         add_detail_btn = (Button)findViewById(R.id.add_detail_btn);
         container = (LinearLayout)findViewById(R.id.container);
+        list = new ArrayList<>();
         add_detail_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,7 +40,6 @@ public class AddClass extends Activity {
     private LinearLayout createLayout() {
         LinearLayout res = new LinearLayout(getBaseContext());
         res.setOrientation(LinearLayout.HORIZONTAL);
-
 
         ArrayAdapter<String> adapter_week = new ArrayAdapter<>(this, R.layout.spinner_item, weeks);
         adapter_week.setDropDownViewResource(R.layout.dropdown);
@@ -66,6 +69,9 @@ public class AddClass extends Activity {
         TextView textView2 = createText("节 上");
         TextView textView3 = createText("节课 教室");
 
+        Button del_btn = createDelButton();
+
+        res.addView(del_btn, new ViewGroup.LayoutParams(100, 100));
         res.addView(spinner_week, layoutParamsWrap);
         res.addView(textView1, layoutParamsWrap);
         res.addView(spinner_start, layoutParamsWrap);
@@ -73,6 +79,8 @@ public class AddClass extends Activity {
         res.addView(spinner_length, layoutParamsWrap);
         res.addView(textView3, layoutParamsWrap);
         res.addView(editText, layoutParamsMatch);
+
+        list.add(res);
 
         return res;
     }
@@ -91,5 +99,22 @@ public class AddClass extends Activity {
         textView.setShadowLayer(2,5,5,Color.BLACK);
         textView.setGravity(Gravity.CENTER);
         return textView;
+    }
+
+    private Button createDelButton() {
+        Button button = new Button(getBaseContext());
+        button.setBackgroundResource(R.drawable.btn_shape_red);
+        button.setText("X");
+        button.setTextColor(Color.WHITE);
+        button.setTextSize(12);
+        button.setGravity(Gravity.CENTER);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LinearLayout temp = list.get(list.size()-1);
+                container.removeView(temp);
+            }
+        });
+        return button;
     }
 }
