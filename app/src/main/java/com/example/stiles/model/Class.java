@@ -8,7 +8,8 @@ public class Class {
     private String teacher_name;
     private String classroom;
     private int week;
-    private int time;
+    private int start;
+    private int length;
 
     public Class(){
     }
@@ -45,11 +46,19 @@ public class Class {
         this.week = week;
     }
 
-    public int getTime() {
-        return time;
+    public int getStart() {
+        return start;
     }
 
-    public void setTime(int time) {
-        this.time = time;
+    public void setStart(int start) {
+        this.start = start;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
     }
 }

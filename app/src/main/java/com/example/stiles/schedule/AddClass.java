@@ -7,25 +7,28 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.example.stiles.model.Class;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * Created by stiles on 16/4/12.
  */
 public class AddClass extends Activity {
-    private Button add_detail_btn;
     private LinearLayout container;
     private static final String[] weeks = {"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
     private static final String[] start = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"};
     private static final String[] length = {"1", "2", "3", "4", "5"};
     private ArrayList<LinearLayout> list;
+    private String class_name;
+    private String teacher_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_class);
-        add_detail_btn = (Button)findViewById(R.id.add_detail_btn);
+        Button add_detail_btn = (Button) findViewById(R.id.add_detail_btn);
         container = (LinearLayout)findViewById(R.id.container);
         list = new ArrayList<>();
         add_detail_btn.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +36,21 @@ public class AddClass extends Activity {
             public void onClick(View view) {
                 LinearLayout temp = createLayout();
                 container.addView(temp);
+            }
+        });
+
+        Button submit_btn = (Button) findViewById(R.id.submit_btn);
+        submit_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //读取所有课程细节信息,存入数据库
+                if (list.size() == 0 || list == null) {
+                    Toast.makeText(AddClass.this, "请输入课程信息", Toast.LENGTH_LONG).show();
+                } else {
+                    //得到课程信息,储存到数据库
+                    saveClassInfo();
+                    finish();
+                }
             }
         });
     }
@@ -112,9 +130,40 @@ public class AddClass extends Activity {
             @Override
             public void onClick(View view) {
                 LinearLayout temp = list.get(list.size()-1);
+                list.remove(list.size()-1);
                 container.removeView(temp);
             }
         });
         return button;
+    }
+
+    private void saveClassInfo() {
+        Class c;
+        c = new Class();
+        EditText editText = (EditText) findViewById(R.id.class_name);
+        class_name = editText.getText().toString();
+        editText = (EditText) findViewById(R.id.teacher_name);
+        teacher_name = editText.getText().toString();
+
+        c.setClass_name(class_name);
+        c.setTeacher_name(teacher_name);
+
+        for (LinearLayout curLayout : list) {
+            Spinner spinner = (Spinner)curLayout.getChildAt(1);//取得星期
+            int week = spinner.getSelectedItemPosition();
+            spinner = (Spinner)curLayout.getChildAt(3);//取得开始
+            int start = spinner.getSelectedItemPosition();
+            spinner = (Spinner)curLayout.getChildAt(5);
+            int length = spinner.getSelectedItemPosition();
+            EditText et = (EditText)curLayout.getChildAt(7);
+            String classroom = et.getText().toString();
+
+            //Toast.makeText(AddClass.this, String.valueOf(week), Toast.LENGTH_LONG).show();
+
+            c.setWeek(week);
+            c.setStart(start);
+            c.setLength(length);
+            c.setClassroom(classroom);
+        }
     }
 }
