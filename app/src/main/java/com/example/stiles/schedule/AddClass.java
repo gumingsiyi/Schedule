@@ -1,12 +1,15 @@
 package com.example.stiles.schedule;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.example.stiles.database.DatabaseHelper;
 import com.example.stiles.model.Class;
 
 import java.util.ArrayList;
@@ -23,6 +26,7 @@ public class AddClass extends Activity {
     private ArrayList<LinearLayout> list;
     private String class_name;
     private String teacher_name;
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,6 +152,8 @@ public class AddClass extends Activity {
         c.setClass_name(class_name);
         c.setTeacher_name(teacher_name);
 
+        DatabaseHelper helper = new DatabaseHelper(getBaseContext());
+        db = helper.getWritableDatabase();
         for (LinearLayout curLayout : list) {
             Spinner spinner = (Spinner)curLayout.getChildAt(1);//取得星期
             int week = spinner.getSelectedItemPosition();
@@ -162,8 +168,21 @@ public class AddClass extends Activity {
 
             c.setWeek(week);
             c.setStart(start);
-            c.setLength(length);
+            c.setLength(length + 1);
             c.setClassroom(classroom);
+
+            //储存进数据库
+            ContentValues values = new ContentValues();
+            values.put(DatabaseHelper.CLASSNAME, c.getClass_name());
+            values.put(DatabaseHelper.TEACHERNAME, c.getTeacher_name());
+            values.put(DatabaseHelper.CLASSROOM, c.getClassroom());
+            values.put(DatabaseHelper.WEEK, c.getWeek());
+            values.put(DatabaseHelper.START, c.getStart());
+            values.put(DatabaseHelper.LENGTH, c.getLength());
+            db.insert(DatabaseHelper.TABLENAME, "id", values);
+            values.clear();
+
         }
+        db.close();
     }
 }
