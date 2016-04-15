@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private static final int ADD_CLASS_CODE = 1;
+    private static final int SHOW_CLASS_CODE = 2;
     private RelativeLayout[] week = new RelativeLayout[7];
     private int per_height;
     private int height;
@@ -86,6 +87,10 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 drawClass();
             }
+        } else if (requestCode == SHOW_CLASS_CODE) {
+            if (resultCode == RESULT_OK) {
+                drawClass();
+            }
         }
     }
     //从数据库中得到课程信息,生成视图.
@@ -97,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
         if (classList != null) {
             for (Class cur: classList) {
                 RelativeLayout class_layout = createClassLayout(cur.getStart(), cur.getLength());
-                //class_layout.setOrientation(LinearLayout.VERTICAL);
 
                 TextView class_text = createClassInfo(cur.getClass_name()+"\n /@ "+cur.getClassroom());
 
@@ -171,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         return layout;
     }
 
-    private Button createIdBtn(int id) {
+    private Button createIdBtn(final int id) {
         Button btn = new Button(getBaseContext());
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         btn.setText(String.valueOf(id));
@@ -180,7 +184,10 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(MainActivity.this,"hhhh",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent();
+                intent.putExtra("id", id);
+                intent.setClass(getBaseContext(), ShowClassActivity.class);
+                startActivityForResult(intent, SHOW_CLASS_CODE);
             }
         });
         return btn;

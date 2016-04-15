@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@drawable/book"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+            android:alpha="0.9"
+            android:background="@drawable/background_white"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:layout_gravity="center_horizontal"
+            android:layout_margin="35dp">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/show_class_name" android:layout_gravity="center_horizontal"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#333333"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/show_teacher_name" android:layout_gravity="center_horizontal"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#333333"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/show_time" android:layout_gravity="center_horizontal"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_delete"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:text="删     除"
+                android:id="@+id/button" android:layout_gravity="center_horizontal" android:layout_margin="5dp"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#333333"/>
+
+    </LinearLayout>
+
+</LinearLayout>
