@@ -155,11 +155,16 @@ public class MainActivity extends AppCompatActivity {
         RelativeLayout layout = new RelativeLayout(getBaseContext());
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, length * per_height-2);
         if (color_flag == 1) {
-            layout.setBackgroundResource(R.drawable.background_pink);
-        } else {
-            layout.setBackgroundResource(R.drawable.bacckground_lightpurple);
+            layout.setBackgroundResource(R.drawable.layout_pink);
+        } else if (color_flag == 2){
+            layout.setBackgroundResource(R.drawable.layout_lightpurple);
+        } else if (color_flag == 3) {
+            layout.setBackgroundResource(R.drawable.layout_lightblue);
+        } else  {
+            layout.setBackgroundResource(R.drawable.layout_lightgreen);
         }
-        color_flag = 1 - color_flag;
+        color_flag++;
+        color_flag %= 4;
 
         params.setMargins(2, start*per_height+2, 2, 2);
         layout.setLayoutParams(params);
