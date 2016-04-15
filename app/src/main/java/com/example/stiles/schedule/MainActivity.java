@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == ADD_CLASS_CODE) {
             if (resultCode == RESULT_OK) {
-
+                drawClass();
             }
         }
     }
@@ -189,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
         textView.setText(string);
         textView.setTextColor(Color.BLACK);
         textView.setLayoutParams(params);
+        textView.setTextSize(12);
         return textView;
     }
 }

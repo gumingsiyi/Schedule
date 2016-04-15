@@ -6,6 +6,7 @@
         android:layout_height="match_parent"
         tools:context="com.example.stiles.schedule.MainActivity"
         android:id="@+id/main_layout"
+        android:background="@drawable/book"
 >
 
     <LinearLayout
@@ -118,6 +119,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/background_lightblue"
+            android:alpha="0.8"
             android:id="@+id/mon">
     </RelativeLayout>
     <RelativeLayout
@@ -125,6 +127,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
+            android:alpha="0.8"
             android:background="@drawable/background_lightgreen"
             android:id="@+id/tue">
     </RelativeLayout>
@@ -133,6 +136,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
+            android:alpha="0.8"
             android:background="@drawable/background_lightblue"
             android:id="@+id/wed">
     </RelativeLayout>
@@ -141,6 +145,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
+            android:alpha="0.8"
             android:background="@drawable/background_lightgreen"
             android:id="@+id/thu">
     </RelativeLayout>
@@ -150,6 +155,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/background_lightblue"
+            android:alpha="0.8"
             android:id="@+id/fri">
     </RelativeLayout>
     <RelativeLayout
@@ -158,6 +164,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/background_lightgreen"
+            android:alpha="0.8"
             android:id="@+id/sat">
     </RelativeLayout>
     <RelativeLayout
@@ -166,6 +173,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:background="@drawable/background_lightblue"
+            android:alpha="0.8"
             android:id="@+id/sun">
     </RelativeLayout>
 </LinearLayout>
