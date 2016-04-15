@@ -62,6 +62,9 @@ public class AddClass extends Activity {
     private LinearLayout createLayout() {
         LinearLayout res = new LinearLayout(getBaseContext());
         res.setOrientation(LinearLayout.HORIZONTAL);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0, 20, 0, 0);
+        res.setLayoutParams(params);
 
         ArrayAdapter<String> adapter_week = new ArrayAdapter<>(this, R.layout.spinner_item, weeks);
         adapter_week.setDropDownViewResource(R.layout.dropdown);
