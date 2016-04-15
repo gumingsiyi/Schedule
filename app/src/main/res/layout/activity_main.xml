@@ -119,20 +119,6 @@
             android:layout_weight="1.0"
             android:background="@drawable/background_lightblue"
             android:id="@+id/mon">
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="128dp"
-                android:background="@drawable/bacckground_lightpurple"
-                android:layout_marginTop="89dp" android:layout_alignParentTop="false"
-                android:layout_alignParentStart="true" android:id="@+id/relativeLayout">
-        </RelativeLayout>
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_alignParentStart="true"
-                android:background="@drawable/background_pink"
-                android:layout_marginTop="400dp">
-        </RelativeLayout>
     </RelativeLayout>
     <RelativeLayout
             android:orientation="horizontal"
@@ -141,12 +127,6 @@
             android:layout_weight="1.0"
             android:background="@drawable/background_lightgreen"
             android:id="@+id/tue">
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" android:layout_marginTop="100dp">
-        </LinearLayout>
     </RelativeLayout>
     <RelativeLayout
             android:orientation="horizontal"

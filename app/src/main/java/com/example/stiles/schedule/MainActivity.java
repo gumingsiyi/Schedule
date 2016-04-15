@@ -3,6 +3,7 @@ package com.example.stiles.schedule;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.*;
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == ADD_CLASS_CODE) {
             if (resultCode == RESULT_OK) {
-                
+
             }
         }
     }
@@ -98,9 +99,13 @@ public class MainActivity extends AppCompatActivity {
                 RelativeLayout class_layout = createClassLayout(cur.getStart(), cur.getLength());
                 //class_layout.setOrientation(LinearLayout.VERTICAL);
 
-                TextView class_name_text = new TextView(getBaseContext());
-                TextView classroom_text = new TextView(getBaseContext());
-                class_name_text.setGravity(Gravity.LEFT|Gravity.TOP);
+                TextView class_text = createClassInfo(cur.getClass_name()+"\n /@ "+cur.getClassroom());
+
+                class_text.setGravity(Gravity.TOP | Gravity.LEFT);
+
+                Button id_btn = createIdBtn(cur.id);
+                class_layout.addView(id_btn);
+                class_layout.addView(class_text);
 
                 week[cur.getWeek()].addView(class_layout);
             }
@@ -148,20 +153,42 @@ public class MainActivity extends AppCompatActivity {
 
     private RelativeLayout createClassLayout(int start, int length) {
         RelativeLayout layout = new RelativeLayout(getBaseContext());
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, length * per_height-2);
         if (color_flag == 1) {
             layout.setBackgroundResource(R.drawable.background_pink);
         } else {
             layout.setBackgroundResource(R.drawable.bacckground_lightpurple);
         }
         color_flag = 1 - color_flag;
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, length * per_height);
-        params.setMargins(0, start*per_height, 0, 0);
+
+        params.setMargins(2, start*per_height+2, 2, 2);
         layout.setLayoutParams(params);
         return layout;
     }
 
     private Button createIdBtn(int id) {
         Button btn = new Button(getBaseContext());
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        btn.setText(String.valueOf(id));
+        btn.setAlpha(0);
+        btn.setLayoutParams(params);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(MainActivity.this,"hhhh",Toast.LENGTH_LONG).show();
+            }
+        });
         return btn;
+    }
+
+    private TextView createClassInfo(String string) {
+        TextView textView = new TextView(getBaseContext());
+
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+        textView.setText(string);
+        textView.setTextColor(Color.BLACK);
+        textView.setLayoutParams(params);
+        return textView;
     }
 }
