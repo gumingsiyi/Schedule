@@ -5,12 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.view.*;
+import android.widget.*;
 import com.example.stiles.database.DatabaseHelper;
 import com.example.stiles.model.Class;
 
@@ -23,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private int height;
     private int width;
     private boolean hasMeasured = false;
+    int color_flag = 1;
     private ArrayList<Class> classList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +44,13 @@ public class MainActivity extends AppCompatActivity {
                     width = week[0].getMeasuredWidth();
                     per_height = height/12;
                     hasMeasured = true;
-                    Toast.makeText(MainActivity.this, String.valueOf(height), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(MainActivity.this, String.valueOf(height), Toast.LENGTH_LONG).show();
+                    drawClass();
                 }
                 return true;
             }
         });
+
 
 
     }
@@ -96,7 +95,14 @@ public class MainActivity extends AppCompatActivity {
         setClassList();
         if (classList != null) {
             for (Class cur: classList) {
+                RelativeLayout class_layout = createClassLayout(cur.getStart(), cur.getLength());
+                //class_layout.setOrientation(LinearLayout.VERTICAL);
 
+                TextView class_name_text = new TextView(getBaseContext());
+                TextView classroom_text = new TextView(getBaseContext());
+                class_name_text.setGravity(Gravity.LEFT|Gravity.TOP);
+
+                week[cur.getWeek()].addView(class_layout);
             }
         }
     }
@@ -109,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
         int idIndex = cursor.getColumnIndex(DatabaseHelper.ID);
         int classNameIndex = cursor.getColumnIndex(DatabaseHelper.CLASSNAME);
-        int teacherNameIndex = cursor.getColumnIndex(DatabaseHelper.TABLENAME);
+        int teacherNameIndex = cursor.getColumnIndex(DatabaseHelper.TEACHERNAME);
         int classroomIndex = cursor.getColumnIndex(DatabaseHelper.CLASSROOM);
         int weekIndex = cursor.getColumnIndex(DatabaseHelper.WEEK);
         int startIndex = cursor.getColumnIndex(DatabaseHelper.START);
@@ -136,5 +142,26 @@ public class MainActivity extends AppCompatActivity {
             c.id = id;
             classList.add(c);
         }
+
+        cursor.close();
+    }
+
+    private RelativeLayout createClassLayout(int start, int length) {
+        RelativeLayout layout = new RelativeLayout(getBaseContext());
+        if (color_flag == 1) {
+            layout.setBackgroundResource(R.drawable.background_pink);
+        } else {
+            layout.setBackgroundResource(R.drawable.bacckground_lightpurple);
+        }
+        color_flag = 1 - color_flag;
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, length * per_height);
+        params.setMargins(0, start*per_height, 0, 0);
+        layout.setLayoutParams(params);
+        return layout;
+    }
+
+    private Button createIdBtn(int id) {
+        Button btn = new Button(getBaseContext());
+        return btn;
     }
 }
