@@ -4,8 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 import com.example.stiles.database.DatabaseHelper;
 import com.example.stiles.model.Class;
+import com.example.stiles.schedule.MainActivity;
+import com.example.stiles.schedule.ShowClassActivity;
 
 import java.util.ArrayList;
 
@@ -20,6 +23,7 @@ public class ClassService {
         Rdb = helper.getReadableDatabase();
         Wdb = helper.getWritableDatabase();
     }
+    //保存一节课信息
     public void save(Class c) {
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.CLASSNAME, c.getClass_name());
@@ -30,6 +34,7 @@ public class ClassService {
         values.put(DatabaseHelper.LENGTH, c.getLength());
         Wdb.insert(DatabaseHelper.TABLENAME, "id", values);
     }
+    //查询数据库中所有课程信息
     public ArrayList<Class> findAll() {
         ArrayList<Class> list = new ArrayList<>();
         Cursor cursor = Rdb.query(DatabaseHelper.TABLENAME, null, null, null, null, null, null);
@@ -66,5 +71,39 @@ public class ClassService {
         cursor.close();
         return list;
     }
+    //根据id删除课程信息
+    public void deleteById(int id) {
+        Wdb.delete(DatabaseHelper.TABLENAME, "id=?", new String[] {String.valueOf(id)});
+    }
+    //根据id查询课程信息
+    public Class findById(int id) {
+        Class c;
+        Cursor cursor = Rdb.query(DatabaseHelper.TABLENAME, null, "id=?", new String[]{String.valueOf(id)}, null, null, null);
+        int classNameIndex = cursor.getColumnIndex(DatabaseHelper.CLASSNAME);
+        int teacherNameIndex = cursor.getColumnIndex(DatabaseHelper.TEACHERNAME);
+        int classroomIndex = cursor.getColumnIndex(DatabaseHelper.CLASSROOM);
+        int weekIndex = cursor.getColumnIndex(DatabaseHelper.WEEK);
+        int startIndex = cursor.getColumnIndex(DatabaseHelper.START);
+        int lengthIndex = cursor.getColumnIndex(DatabaseHelper.LENGTH);
 
+        String className;
+        String teacherName;
+        String classroom;
+        int week;
+        int start;
+        int length;
+        cursor.moveToFirst();
+        className = cursor.getString(classNameIndex);
+        teacherName = cursor.getString(teacherNameIndex);
+
+        classroom = cursor.getString(classroomIndex);
+        week = cursor.getInt(weekIndex);
+        start = cursor.getInt(startIndex);
+        length = cursor.getInt(lengthIndex);
+
+        c = new Class(className, teacherName, classroom, week, start, length);
+        c.id = id;
+        cursor.close();
+        return c;
+    }
 }
