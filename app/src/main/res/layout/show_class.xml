@@ -17,7 +17,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
+                android:text="课程名称: 计算机图形学"
+                android:gravity="center"
                 android:id="@+id/show_class_name" android:layout_gravity="center_horizontal"/>
         <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#333333"/>
         <TextView
@@ -25,15 +26,27 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
+                android:text="任课教师: 汤颖"
+                android:gravity="center"
                 android:id="@+id/show_teacher_name" android:layout_gravity="center_horizontal"/>
         <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#333333"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="课程地点: 法A307"
+                android:gravity="center"
+                android:id="@+id/show_place" android:layout_gravity="center_horizontal"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#333333"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="2"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
+                android:text="课程时间: \n\n周三 8 9节"
+                android:gravity="center"
                 android:id="@+id/show_time" android:layout_gravity="center_horizontal"/>
         <Button
                 android:layout_width="match_parent"
@@ -42,7 +55,7 @@
                 android:textColor="#ffffff"
                 android:textSize="20sp"
                 android:text="删     除"
-                android:id="@+id/button" android:layout_gravity="center_horizontal" android:layout_margin="5dp"/>
+                android:id="@+id/del_btn" android:layout_gravity="center_horizontal" android:layout_margin="5dp"/>
         <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#333333"/>
 
     </LinearLayout>

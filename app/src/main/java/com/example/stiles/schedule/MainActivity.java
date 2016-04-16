@@ -1,15 +1,13 @@
 package com.example.stiles.schedule;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
-import com.example.stiles.database.DatabaseHelper;
 import com.example.stiles.model.Class;
+import com.example.stiles.service.ClassService;
 
 import java.util.ArrayList;
 
@@ -19,15 +17,16 @@ public class MainActivity extends AppCompatActivity {
     private RelativeLayout[] week = new RelativeLayout[7];
     private int per_height;
     private int height;
-    private int width;
     private boolean hasMeasured = false;
-    int color_flag = 1;
-    private ArrayList<Class> classList;
+    private int color_flag = 1;
+    private ClassService classService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final LinearLayout main_layout = (LinearLayout)findViewById(R.id.main_layout);
+        classService = new ClassService(getBaseContext());
 
         week[0] = (RelativeLayout) findViewById(R.id.mon);
         week[1] = (RelativeLayout) findViewById(R.id.tue);
@@ -43,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
             public boolean onPreDraw() {
                 if (!hasMeasured) {
                     height = week[0].getMeasuredHeight();
-                    width = week[0].getMeasuredWidth();
                     per_height = height/12;
                     hasMeasured = true;
                     //Toast.makeText(MainActivity.this, String.valueOf(height), Toast.LENGTH_LONG).show();
@@ -84,11 +82,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == ADD_CLASS_CODE) {
-            if (resultCode == RESULT_OK) {
+            if (resultCode == RESULT_CANCELED) {
                 drawClass();
             }
         } else if (requestCode == SHOW_CLASS_CODE) {
-            if (resultCode == RESULT_OK) {
+            if (resultCode == RESULT_CANCELED) {
                 drawClass();
             }
         }
@@ -98,61 +96,18 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 7; i++) {
             week[i].removeAllViews();
         }
-        setClassList();
+        ArrayList<Class> classList = classService.findAll();
         if (classList != null) {
             for (Class cur: classList) {
                 RelativeLayout class_layout = createClassLayout(cur.getStart(), cur.getLength());
-
                 TextView class_text = createClassInfo(cur.getClass_name()+"\n /@ "+cur.getClassroom());
-
                 class_text.setGravity(Gravity.TOP | Gravity.LEFT);
-
                 Button id_btn = createIdBtn(cur.id);
                 class_layout.addView(id_btn);
                 class_layout.addView(class_text);
-
                 week[cur.getWeek()].addView(class_layout);
             }
         }
-    }
-
-    private void setClassList() {
-        classList = new ArrayList<>();
-        DatabaseHelper helper = new DatabaseHelper(getBaseContext());
-        SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.query(DatabaseHelper.TABLENAME, null, null, null, null, null, null);
-
-        int idIndex = cursor.getColumnIndex(DatabaseHelper.ID);
-        int classNameIndex = cursor.getColumnIndex(DatabaseHelper.CLASSNAME);
-        int teacherNameIndex = cursor.getColumnIndex(DatabaseHelper.TEACHERNAME);
-        int classroomIndex = cursor.getColumnIndex(DatabaseHelper.CLASSROOM);
-        int weekIndex = cursor.getColumnIndex(DatabaseHelper.WEEK);
-        int startIndex = cursor.getColumnIndex(DatabaseHelper.START);
-        int lengthIndex = cursor.getColumnIndex(DatabaseHelper.LENGTH);
-
-        int id;
-        String className;
-        String teacherName;
-        String classroom;
-        int week;
-        int start;
-        int length;
-
-        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-            id = cursor.getInt(idIndex);
-            className = cursor.getString(classNameIndex);
-            teacherName = cursor.getString(teacherNameIndex);
-            classroom = cursor.getString(classroomIndex);
-            week = cursor.getInt(weekIndex);
-            start = cursor.getInt(startIndex);
-            length = cursor.getInt(lengthIndex);
-
-            Class c = new Class(className, teacherName, classroom, week, start, length);
-            c.id = id;
-            classList.add(c);
-        }
-
-        cursor.close();
     }
 
     private RelativeLayout createClassLayout(int start, int length) {
@@ -188,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("id", id);
                 intent.setClass(getBaseContext(), ShowClassActivity.class);
                 startActivityForResult(intent, SHOW_CLASS_CODE);
+                overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
             }
         });
         return btn;
@@ -195,9 +151,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView createClassInfo(String string) {
         TextView textView = new TextView(getBaseContext());
-
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-
         textView.setText(string);
         textView.setTextColor(Color.BLACK);
         textView.setLayoutParams(params);

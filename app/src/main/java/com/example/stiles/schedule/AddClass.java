@@ -1,20 +1,16 @@
 package com.example.stiles.schedule;
 
 import android.app.Activity;
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
-import com.example.stiles.database.DatabaseHelper;
 import com.example.stiles.model.Class;
+import com.example.stiles.service.ClassService;
 
 import java.util.ArrayList;
-import java.util.StringTokenizer;
-
 /**
  * Created by stiles on 16/4/12.
  */
@@ -24,14 +20,13 @@ public class AddClass extends Activity {
     private static final String[] start = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"};
     private static final String[] length = {"1", "2", "3", "4", "5"};
     private ArrayList<LinearLayout> list;
-    private String class_name;
-    private String teacher_name;
-    SQLiteDatabase db;
+    private ClassService classService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_class);
+        classService = new ClassService(getBaseContext());
         Button add_detail_btn = (Button) findViewById(R.id.add_detail_btn);
         container = (LinearLayout)findViewById(R.id.container);
         list = new ArrayList<>();
@@ -53,7 +48,7 @@ public class AddClass extends Activity {
                 } else {
                     //得到课程信息,储存到数据库
                     saveClassInfo();
-                    finish();
+                    AddClass.this.onBackPressed();
                 }
             }
         });
@@ -72,7 +67,6 @@ public class AddClass extends Activity {
         adapter_length.setDropDownViewResource(R.layout.dropdown);
         ArrayAdapter<String> adapter_start = new ArrayAdapter<>(this, R.layout.spinner_item, start);
         adapter_start.setDropDownViewResource(R.layout.dropdown);
-
 
         Spinner spinner_week = createSpinner();
         spinner_week.setAdapter(adapter_week);
@@ -148,15 +142,13 @@ public class AddClass extends Activity {
         Class c;
         c = new Class();
         EditText editText = (EditText) findViewById(R.id.class_name);
-        class_name = editText.getText().toString();
+        String class_name = editText.getText().toString();
         editText = (EditText) findViewById(R.id.teacher_name);
-        teacher_name = editText.getText().toString();
+        String teacher_name = editText.getText().toString();
 
         c.setClass_name(class_name);
         c.setTeacher_name(teacher_name);
 
-        DatabaseHelper helper = new DatabaseHelper(getBaseContext());
-        db = helper.getWritableDatabase();
         for (LinearLayout curLayout : list) {
             Spinner spinner = (Spinner)curLayout.getChildAt(1);//取得星期
             int week = spinner.getSelectedItemPosition();
@@ -166,26 +158,13 @@ public class AddClass extends Activity {
             int length = spinner.getSelectedItemPosition();
             EditText et = (EditText)curLayout.getChildAt(7);
             String classroom = et.getText().toString();
-
             //Toast.makeText(AddClass.this, String.valueOf(week), Toast.LENGTH_LONG).show();
-
             c.setWeek(week);
             c.setStart(start);
             c.setLength(length + 1);
             c.setClassroom(classroom);
-
             //储存进数据库
-            ContentValues values = new ContentValues();
-            values.put(DatabaseHelper.CLASSNAME, c.getClass_name());
-            values.put(DatabaseHelper.TEACHERNAME, c.getTeacher_name());
-            values.put(DatabaseHelper.CLASSROOM, c.getClassroom());
-            values.put(DatabaseHelper.WEEK, c.getWeek());
-            values.put(DatabaseHelper.START, c.getStart());
-            values.put(DatabaseHelper.LENGTH, c.getLength());
-            db.insert(DatabaseHelper.TABLENAME, "id", values);
-            values.clear();
-
+            classService.save(c);
         }
-        db.close();
     }
 }
