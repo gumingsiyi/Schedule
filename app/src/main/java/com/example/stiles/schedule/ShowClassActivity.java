@@ -35,7 +35,7 @@ public class ShowClassActivity extends Activity {
         show_teacher_name.setText("任课教师: " + c.getTeacher_name());
         show_place.setText("课程地点: " + c.getClassroom());
         String time = "课程时间:\n\n";
-        time += weeks[c.getWeek()];
+        time += weeks[c.getWeek()]+" "+"第";
         int cur = c.getStart()+1;
         for (int i = 0; i < c.getLength(); i++, cur++) {
             time += " " + cur;

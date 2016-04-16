@@ -55,13 +55,19 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
+                android:weightSum="1.0"
                 android:layout_height="wrap_content" android:layout_gravity="center">
+            <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_height="match_parent">
+            </FrameLayout>
             <Button
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="+"
-                    android:textSize="30sp"
-                    android:layout_marginLeft="70dp"
+                    android:textSize="20sp"
                     android:textColor="#ffffff"
                     android:background="@drawable/btn_shape_circle_green"
                     android:id="@+id/add_detail_btn" android:layout_gravity="center_horizontal"/>
@@ -75,7 +81,7 @@
                     android:shadowDx="5"
                     android:shadowDy="5"
                     android:shadowRadius="2"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="5dp"
                     android:gravity="center"/>
         </LinearLayout>
 
@@ -83,8 +89,18 @@
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/btn_shape_red"
+            android:textColor="#ffffff"
+            android:text="删一条"
+            android:alpha="1.0"
+            android:id="@+id/del_last_btn" android:layout_gravity="center_horizontal" android:layout_margin="5dp"/>
+
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/btn_shape_orange"
-            android:textColor="#000000"
+            android:textColor="#ffffff"
             android:text="完成"
             android:alpha="1.0"
             android:id="@+id/submit_btn" android:layout_gravity="center_horizontal"/>

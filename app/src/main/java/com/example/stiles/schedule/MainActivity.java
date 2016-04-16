@@ -119,11 +119,13 @@ public class MainActivity extends AppCompatActivity {
             layout.setBackgroundResource(R.drawable.layout_lightpurple);
         } else if (color_flag == 3) {
             layout.setBackgroundResource(R.drawable.layout_lightblue);
-        } else  {
+        } else if (color_flag == 4){
             layout.setBackgroundResource(R.drawable.layout_lightgreen);
+        } else {
+            layout.setBackgroundResource(R.drawable.layout_lightorange);
         }
         color_flag++;
-        color_flag %= 4;
+        color_flag %= 5;
 
         params.setMargins(2, start*per_height+2, 2, 2);
         layout.setLayoutParams(params);

@@ -39,16 +39,30 @@ public class AddClass extends Activity {
         });
 
         Button submit_btn = (Button) findViewById(R.id.submit_btn);
+        Button del_btn = (Button) findViewById(R.id.del_last_btn);
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //读取所有课程细节信息,存入数据库
                 if (list.size() == 0 || list == null) {
-                    Toast.makeText(AddClass.this, "请输入课程信息", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddClass.this, "没输入课程信息呢!", Toast.LENGTH_LONG).show();
                 } else {
                     //得到课程信息,储存到数据库
                     saveClassInfo();
                     AddClass.this.onBackPressed();
+                }
+            }
+        });
+
+        del_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (list.size() == 0 || list == null) {
+                    Toast.makeText(AddClass.this, "没啥可删的了!", Toast.LENGTH_LONG).show();
+                } else {
+                    LinearLayout temp = list.get(list.size() - 1);
+                    list.remove(list.size() - 1);
+                    container.removeView(temp);
                 }
             }
         });
@@ -88,9 +102,12 @@ public class AddClass extends Activity {
         TextView textView2 = createText("节 上");
         TextView textView3 = createText("节课 教室");
 
-        Button del_btn = createDelButton();
+        //Button del_btn = createDelButton();
+        int height;
+        EditText temp = (EditText) findViewById(R.id.class_name);
+        height = temp.getMeasuredHeight();
 
-        res.addView(del_btn, new ViewGroup.LayoutParams(100, 100));
+        //res.addView(del_btn, new ViewGroup.LayoutParams(height, height));
         res.addView(spinner_week, layoutParamsWrap);
         res.addView(textView1, layoutParamsWrap);
         res.addView(spinner_start, layoutParamsWrap);
@@ -123,7 +140,7 @@ public class AddClass extends Activity {
     private Button createDelButton() {
         Button button = new Button(getBaseContext());
         button.setBackgroundResource(R.drawable.btn_shape_red);
-        button.setText("X");
+        button.setText("×");
         button.setTextColor(Color.WHITE);
         button.setTextSize(12);
         button.setGravity(Gravity.CENTER);
@@ -150,13 +167,13 @@ public class AddClass extends Activity {
         c.setTeacher_name(teacher_name);
 
         for (LinearLayout curLayout : list) {
-            Spinner spinner = (Spinner)curLayout.getChildAt(1);//取得星期
+            Spinner spinner = (Spinner)curLayout.getChildAt(0);//取得星期
             int week = spinner.getSelectedItemPosition();
-            spinner = (Spinner)curLayout.getChildAt(3);//取得开始
+            spinner = (Spinner)curLayout.getChildAt(2);//取得开始
             int start = spinner.getSelectedItemPosition();
-            spinner = (Spinner)curLayout.getChildAt(5);
+            spinner = (Spinner)curLayout.getChildAt(4);
             int length = spinner.getSelectedItemPosition();
-            EditText et = (EditText)curLayout.getChildAt(7);
+            EditText et = (EditText)curLayout.getChildAt(6);
             String classroom = et.getText().toString();
             //Toast.makeText(AddClass.this, String.valueOf(week), Toast.LENGTH_LONG).show();
             c.setWeek(week);
