@@ -70,10 +70,17 @@ public class AddClass extends Activity {
 
     private LinearLayout createLayout() {
         LinearLayout res = new LinearLayout(getBaseContext());
-        res.setOrientation(LinearLayout.HORIZONTAL);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout up = new LinearLayout(getBaseContext());
+        LinearLayout down = new LinearLayout(getBaseContext());
+
+        up.setOrientation(LinearLayout.HORIZONTAL);
+        down.setOrientation(LinearLayout.HORIZONTAL);
+        res.setOrientation(LinearLayout.VERTICAL);
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.setMargins(0, 20, 0, 0);
         res.setLayoutParams(params);
+        res.setGravity(Gravity.TOP|Gravity.CENTER);
 
         ArrayAdapter<String> adapter_week = new ArrayAdapter<>(this, R.layout.spinner_item, weeks);
         adapter_week.setDropDownViewResource(R.layout.dropdown);
@@ -95,26 +102,27 @@ public class AddClass extends Activity {
         editText.setTextColor(Color.rgb(0,0,0));
         editText.setTextSize(15f);
 
-        ViewGroup.LayoutParams layoutParamsWrap = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        ViewGroup.LayoutParams layoutParamsMatch = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams layoutParamsWrap = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams layoutParamsMatch = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParamsMatch.setMargins(0,5,0,0);
 
         TextView textView1 = createText("从第");
         TextView textView2 = createText("节 上");
-        TextView textView3 = createText("节课 教室");
+        TextView textView3 = createText("节课");
+        TextView textView4 = createText("教室");
 
-        //Button del_btn = createDelButton();
-        int height;
-        EditText temp = (EditText) findViewById(R.id.class_name);
-        height = temp.getMeasuredHeight();
+        up.addView(spinner_week, layoutParamsWrap);
+        up.addView(textView1, layoutParamsWrap);
+        up.addView(spinner_start, layoutParamsWrap);
+        up.addView(textView2, layoutParamsWrap);
+        up.addView(spinner_length, layoutParamsWrap);
+        up.addView(textView3, layoutParamsWrap);
 
-        //res.addView(del_btn, new ViewGroup.LayoutParams(height, height));
-        res.addView(spinner_week, layoutParamsWrap);
-        res.addView(textView1, layoutParamsWrap);
-        res.addView(spinner_start, layoutParamsWrap);
-        res.addView(textView2, layoutParamsWrap);
-        res.addView(spinner_length, layoutParamsWrap);
-        res.addView(textView3, layoutParamsWrap);
-        res.addView(editText, layoutParamsMatch);
+        down.addView(textView4);
+        down.addView(editText, layoutParamsMatch);
+
+        res.addView(up, layoutParamsWrap);
+        res.addView(down, layoutParamsMatch);
 
         list.add(res);
 
@@ -137,24 +145,6 @@ public class AddClass extends Activity {
         return textView;
     }
 
-    private Button createDelButton() {
-        Button button = new Button(getBaseContext());
-        button.setBackgroundResource(R.drawable.btn_shape_red);
-        button.setText("×");
-        button.setTextColor(Color.WHITE);
-        button.setTextSize(12);
-        button.setGravity(Gravity.CENTER);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LinearLayout temp = list.get(list.size()-1);
-                list.remove(list.size()-1);
-                container.removeView(temp);
-            }
-        });
-        return button;
-    }
-
     private void saveClassInfo() {
         Class c;
         c = new Class();
@@ -167,13 +157,16 @@ public class AddClass extends Activity {
         c.setTeacher_name(teacher_name);
 
         for (LinearLayout curLayout : list) {
-            Spinner spinner = (Spinner)curLayout.getChildAt(0);//取得星期
+            LinearLayout up = (LinearLayout)curLayout.getChildAt(0);
+            Spinner spinner = (Spinner)up.getChildAt(0);//取得星期
             int week = spinner.getSelectedItemPosition();
-            spinner = (Spinner)curLayout.getChildAt(2);//取得开始
+            spinner = (Spinner)up.getChildAt(2);//取得开始
             int start = spinner.getSelectedItemPosition();
-            spinner = (Spinner)curLayout.getChildAt(4);
+            spinner = (Spinner)up.getChildAt(4);
             int length = spinner.getSelectedItemPosition();
-            EditText et = (EditText)curLayout.getChildAt(6);
+
+            LinearLayout down = (LinearLayout)curLayout.getChildAt(1);
+            EditText et = (EditText)down.getChildAt(1);
             String classroom = et.getText().toString();
             //Toast.makeText(AddClass.this, String.valueOf(week), Toast.LENGTH_LONG).show();
             c.setWeek(week);

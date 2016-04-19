@@ -50,18 +50,12 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
-            android:layout_margin="20dp"
-            android:id="@+id/container">
+            android:layout_margin="20dp">
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:weightSum="1.0"
-                android:layout_height="wrap_content" android:layout_gravity="center">
-            <FrameLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="0.3"
-                    android:layout_height="match_parent">
-            </FrameLayout>
+                android:layout_height="wrap_content" android:gravity="center">
             <Button
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="wrap_content"
@@ -71,37 +65,37 @@
                     android:textColor="#ffffff"
                     android:background="@drawable/btn_shape_circle_green"
                     android:id="@+id/add_detail_btn" android:layout_gravity="center_horizontal"/>
-            <TextView
-                    android:textColor="#ffffff"
-                    android:textSize="15sp"
+            <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:textSize="20sp"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="点击添加课程时间地点"
-                    android:shadowColor="#000000"
-                    android:shadowDx="5"
-                    android:shadowDy="5"
-                    android:shadowRadius="2"
-                    android:layout_marginLeft="5dp"
-                    android:gravity="center"/>
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_shape_red"
+                    android:textColor="#ffffff"
+                    android:text="-"
+                    android:alpha="1.0"
+                    android:id="@+id/del_last_btn" android:layout_gravity="center_horizontal" android:layout_margin="5dp"/>
+            <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_shape_orange"
+                    android:textColor="#ffffff"
+                    android:text="完成"
+                    android:alpha="1.0"
+                    android:id="@+id/submit_btn" android:layout_gravity="center_horizontal"/>
         </LinearLayout>
 
     </LinearLayout>
-    <Button
-            android:layout_width="wrap_content"
+    <ScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_shape_red"
-            android:textColor="#ffffff"
-            android:text="删一条"
-            android:alpha="1.0"
-            android:id="@+id/del_last_btn" android:layout_gravity="center_horizontal" android:layout_margin="5dp"/>
-
-
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_shape_orange"
-            android:textColor="#ffffff"
-            android:text="完成"
-            android:alpha="1.0"
-            android:id="@+id/submit_btn" android:layout_gravity="center_horizontal"/>
+            android:id="@+id/scrollView" android:layout_gravity="center">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:id="@+id/container"
+                android:layout_height="wrap_content" android:gravity="center_horizontal">
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
